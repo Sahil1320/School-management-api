@@ -1,87 +1,78 @@
 # School Management API
 
-A Node.js REST API for managing school data.
-The API allows users to add new schools and retrieve a list of schools sorted by proximity to a given location.
+A RESTful API built using **Node.js**, **Express.js**, and **MySQL** to manage school data.
+The API allows users to add new schools and retrieve a list of schools sorted by proximity to a user's location.
 
-## Tech Stack
+---
 
-* Node.js
-* Express.js
-* MySQL
-* Postman (for API testing)
+## 🚀 Features
 
-## Features
+* Add new schools to the database
+* Retrieve schools sorted by distance from a user location
+* MySQL database integration
+* Hosted API for live testing
+* Postman collection for easy API testing
 
-* Add new school with name, address, latitude, and longitude
-* Retrieve list of schools sorted by distance from user location
-* Input validation
-* Distance calculation using Haversine formula
-* RESTful API design
+---
 
-## Project Structure
+## 🛠️ Tech Stack
+
+* **Node.js**
+* **Express.js**
+* **MySQL**
+* **Render** (API hosting)
+* **Railway** (MySQL database)
+* **Postman** (API testing)
+
+---
+
+## 📂 Project Structure
 
 ```
-school-api
+school-api/
 │
-├── db.js
-├── index.js
-├── package.json
-├── node_modules
-└── README.md
+├── index.js          # Main server file
+├── db.js             # Database connection
+├── package.json      # Project dependencies
+├── README.md         # Documentation
+└── .env              # Environment variables (not included in repo)
 ```
 
-## Installation
+---
 
-1. Clone the repository
+## ⚙️ Environment Variables
 
-```
-git clone  https://github.com/Sahil1320/School-management-api.git
-```
-
-2. Navigate to project directory
+Create a `.env` file in the root directory and add the following:
 
 ```
-cd school-api
+MYSQLHOST=your_database_host
+MYSQLPORT=your_database_port
+MYSQLDATABASE=your_database_name
+MYSQLUSER=your_database_user
+MYSQLPASSWORD=your_database_password
 ```
 
-3. Install dependencies
+---
+
+## 📦 Installation
+
+Clone the repository:
+
+```
+ https://github.com/Sahil1320/School-management-api.git
+```
+
+Navigate to the project directory:
+
+```
+cd school-management-api
+```
+
+Install dependencies:
 
 ```
 npm install
 ```
-
-4. Configure database in `db.js`
-
-```
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Sahil2580@",
-  database: "schooldb"
-});
-```
-
-## Database Setup
-
-Create database:
-
-```
-CREATE DATABASE schooldb;
-```
-
-Create table:
-
-```
-CREATE TABLE schools (
- id INT AUTO_INCREMENT PRIMARY KEY,
- name VARCHAR(255) NOT NULL,
- address VARCHAR(255) NOT NULL,
- latitude FLOAT NOT NULL,
- longitude FLOAT NOT NULL
-);
-```
-
-## Run the Server
 
 Start the server:
 
@@ -89,15 +80,17 @@ Start the server:
 node index.js
 ```
 
-Server will run on:
+Server will start on:
 
 ```
 http://localhost:5000
 ```
 
-## API Endpoints
+---
 
-### 1. Add School
+## 📡 API Endpoints
+
+### 1️⃣ Add School
 
 **Endpoint**
 
@@ -105,28 +98,34 @@ http://localhost:5000
 POST /addSchool
 ```
 
-**Request Body**
+**Example Request**
 
 ```
+POST https://school-management-api-xre5.onrender.com/addSchool
+```
+
+**Request Body**
+
+```json
 {
- "name": "ABC School",
- "address": "Delhi",
- "latitude": 28.7041,
- "longitude": 77.1025
+  "name": "ABC School",
+  "address": "Delhi",
+  "latitude": 28.6,
+  "longitude": 77.2
 }
 ```
 
 **Response**
 
-```
+```json
 {
- "message": "School added successfully"
+  "message": "School added successfully"
 }
 ```
 
 ---
 
-### 2. List Schools
+### 2️⃣ List Schools
 
 **Endpoint**
 
@@ -134,59 +133,72 @@ POST /addSchool
 GET /listSchools
 ```
 
-**Query Parameters**
-
-```
-latitude
-longitude
-```
-
 **Example Request**
 
 ```
-http://localhost:5000/listSchools?latitude=28.6&longitude=77.2
+GET https://school-management-api-xre5.onrender.com/listSchools?latitude=28.6&longitude=77.2
 ```
 
 **Response**
 
-```
+Returns schools sorted by distance from the user location.
+
+```json
 [
- {
-  "id": 1,
-  "name": "ABC School",
-  "address": "Delhi",
-  "latitude": 28.6,
-  "longitude": 77.2,
-  "distance": 0
- }
+  {
+    "id": 1,
+    "name": "ABC School",
+    "address": "Delhi",
+    "latitude": 28.6,
+    "longitude": 77.2,
+    "distance": 0
+  }
 ]
 ```
 
-Schools are returned sorted by distance from the user location.
+---
 
-## Distance Calculation
+## 🌍 Live API
 
-The API uses the Haversine formula to calculate the geographical distance between the user location and each school.
+Base URL:
 
-## Testing
+```
+https://school-management-api-xre5.onrender.com
+```
 
-API endpoints were tested using Postman.
+Endpoints:
 
-Postman Collection:
-(Insert your Postman collection link here)
+```
+POST /addSchool
+GET  /listSchools
+```
 
-## Live API
+---
 
-(Insert deployed API link here if hosted)
+## 🧪 Postman Collection
 
-## Source Code Repository
+The API can be tested using the Postman collection:
 
-(Insert GitHub repository link here)
+```
+https://serverless-team-5640.postman.co/workspace/ed2ec38b-f1b2-4515-b840-992450b2a6d6
+```
 
-## Author
+---
 
-Sahil Kumar
+## 📊 Database Schema
 
-## License
+Table: **schools**
 
-This project is created for assignment purposes.
+| Column    | Type                              |
+| --------- | --------------------------------- |
+| id        | INT (Primary Key, Auto Increment) |
+| name      | VARCHAR                           |
+| address   | VARCHAR                           |
+| latitude  | DOUBLE                            |
+| longitude | DOUBLE                            |
+
+---
+
+## 👨‍💻 Author
+
+Developed by **Sahil Kumar**
